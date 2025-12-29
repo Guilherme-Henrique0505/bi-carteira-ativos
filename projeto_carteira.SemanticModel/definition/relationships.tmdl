@@ -1,0 +1,20 @@
+relationship 06142ca1-0018-47fc-8590-1e3d96165df7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: d_calendario.AnoFiscalFim
+	toColumn: LocalDateTable_57a9a228-84bd-4bbe-8eb2-72390ccb8b2e.Date
+
+relationship 69204b3d-4f18-4b17-ac88-dc398f6b5fbb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: d_calendario.AnoFiscalInicio
+	toColumn: LocalDateTable_5fba5e5e-c136-4612-953b-85254637c77d.Date
+
+relationship 8983601c-f786-410c-955e-761ef3061f21
+	joinOnDateBehavior: datePartOnly
+	fromColumn: d_calendario.Data
+	toColumn: LocalDateTable_3f9157ed-2ce0-4e5d-a187-969c16905c45.Date
+
+relationship 5d6c0f33-4da4-43c4-9547-3ff1b31c1bfb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: f_historico_ativos.Data
+	toColumn: LocalDateTable_b49fac9b-2f9c-4e74-8a6e-358ecf384d44.Date
+

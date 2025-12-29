@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "projeto_carteira"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d4c82fb8-08ed-4ace-b37b-6ebb8bb15180"
+  }
+}

@@ -1,0 +1,79 @@
+table f_historico_ativos
+	lineageTag: 676c47ab-1203-4925-bf79-955121d2cdf0
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 57b049b8-2b74-4103-acef-b1b0346cece5
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variation
+			isDefault
+			relationship: 5d6c0f33-4da4-43c4-9547-3ff1b31c1bfb
+			defaultHierarchy: LocalDateTable_b49fac9b-2f9c-4e74-8a6e-358ecf384d44.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ticker
+		dataType: string
+		lineageTag: 82df3557-203f-419a-b736-13c9620e60cf
+		summarizeBy: none
+		sourceColumn: Ticker
+
+		annotation SummarizationSetBy = Automatic
+
+	column Close
+		dataType: string
+		lineageTag: 56604425-8b09-46c0-a785-e3548d947b8f
+		summarizeBy: none
+		sourceColumn: Close
+
+		annotation SummarizationSetBy = Automatic
+
+	column High
+		dataType: string
+		lineageTag: 3530f014-746a-41f0-b1a2-68f234b90ba3
+		summarizeBy: none
+		sourceColumn: High
+
+		annotation SummarizationSetBy = Automatic
+
+	column Low
+		dataType: string
+		lineageTag: 00b25e39-a8d7-4fbd-bc1e-bb56e300409c
+		summarizeBy: none
+		sourceColumn: Low
+
+		annotation SummarizationSetBy = Automatic
+
+	column Open
+		dataType: string
+		lineageTag: 9930304f-995d-4d7d-bf2b-97d1a01dde20
+		summarizeBy: none
+		sourceColumn: Open
+
+		annotation SummarizationSetBy = Automatic
+
+	column Volume
+		dataType: string
+		lineageTag: f6d07fe0-07d3-4d5d-a904-88281a06a67f
+		summarizeBy: none
+		sourceColumn: Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	partition f_historico_ativos = m
+		mode: import
+		source =
+				let
+				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)import os#(lf)#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)if os.path.exists(caminho_db):#(lf)    conn = sqlite3.connect(caminho_db)#(lf)    df = pd.read_sql_query(""SELECT * FROM historico_ativos"", conn)#(lf)    conn.close()#(lf)else:#(lf)    raise FileNotFoundError(f""Arquivo nao encontrado no caminho: {caminho_db}"")"),
+				    df1 = Fonte{[Name="df"]}[Value],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(df1,{{"Data", type datetime}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+
