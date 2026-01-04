@@ -13,8 +13,11 @@ relationship 8983601c-f786-410c-955e-761ef3061f21
 	fromColumn: d_calendario.Data
 	toColumn: LocalDateTable_3f9157ed-2ce0-4e5d-a187-969c16905c45.Date
 
-relationship 5d6c0f33-4da4-43c4-9547-3ff1b31c1bfb
-	joinOnDateBehavior: datePartOnly
+relationship AutoDetected_cbcf8050-ea54-48ad-bab8-45659b4b1446
+	fromColumn: f_historico_ativos.Ticker
+	toColumn: d_empresas.Ticker
+
+relationship 1839b9f2-5ba6-654b-0a27-0572eda018d0
 	fromColumn: f_historico_ativos.Data
-	toColumn: LocalDateTable_b49fac9b-2f9c-4e74-8a6e-358ecf384d44.Date
+	toColumn: d_calendario.Data
 

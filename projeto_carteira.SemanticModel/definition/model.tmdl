@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["f_historico_ativos","d_calendario"]
+annotation PBI_QueryOrder = ["f_historico_ativos","d_calendario","d_empresas"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -18,7 +18,7 @@ ref table DateTableTemplate_15db5996-02fd-4d30-bbbe-00c9ea248a74
 ref table LocalDateTable_57a9a228-84bd-4bbe-8eb2-72390ccb8b2e
 ref table LocalDateTable_5fba5e5e-c136-4612-953b-85254637c77d
 ref table LocalDateTable_3f9157ed-2ce0-4e5d-a187-969c16905c45
-ref table LocalDateTable_b49fac9b-2f9c-4e74-8a6e-358ecf384d44
+ref table d_empresas
 
 ref cultureInfo pt-BR
 

@@ -1,0 +1,90 @@
+table d_empresas
+	lineageTag: 78b3aba1-9fd4-4848-93c6-f2045e0de67c
+
+	column Ticker
+		dataType: string
+		lineageTag: d1d0a57d-9f24-41e6-828b-c61b42d0b714
+		summarizeBy: none
+		sourceColumn: Ticker
+
+		annotation SummarizationSetBy = Automatic
+
+	column Empresa
+		dataType: string
+		lineageTag: b42b48fc-21e8-4994-97ca-aae0cf9d83df
+		summarizeBy: none
+		sourceColumn: Empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column Setor
+		dataType: string
+		lineageTag: 61490491-2110-4807-b250-6b5fdd7ff6b1
+		summarizeBy: none
+		sourceColumn: Setor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cidade
+		dataType: string
+		lineageTag: 5ae43867-7edc-47aa-aead-56d7078ad355
+		summarizeBy: none
+		sourceColumn: Cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		dataType: string
+		lineageTag: 09cadaac-eb5a-4dc4-bcd5-9c6a0f953913
+		summarizeBy: none
+		sourceColumn: Estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pais
+		dataType: string
+		lineageTag: 7753fc6f-ed7c-4a9c-91b4-702d68887fe4
+		summarizeBy: none
+		sourceColumn: Pais
+
+		annotation SummarizationSetBy = Automatic
+
+	column Funcionarios
+		dataType: string
+		lineageTag: fb74c335-fbe3-49aa-a8e0-c89732f056e2
+		summarizeBy: none
+		sourceColumn: Funcionarios
+
+		annotation SummarizationSetBy = Automatic
+
+	column Resumo
+		dataType: string
+		lineageTag: f790b84d-11d0-4e5e-a49d-75d2d0a1e27f
+		summarizeBy: none
+		sourceColumn: Resumo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localização
+		dataType: string
+		lineageTag: 9a0d39ab-23d8-4948-a155-9def3718a6b8
+		summarizeBy: none
+		sourceColumn: Localização
+
+		annotation SummarizationSetBy = Automatic
+
+	partition d_empresas = m
+		mode: import
+		source =
+				let
+				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)conn = sqlite3.connect(caminho_db)#(lf)#(lf)df_empresas = pd.read_sql_query(""SELECT * FROM d_empresa"", conn)#(lf)conn.close()"),
+				    df_empresas1 = Fonte{[Name="df_empresas"]}[Value],
+				    #"Personalização Adicionada" = Table.AddColumn(df_empresas1, "Localização", each [Cidade] & " - " & [Estado] & " - " & [Pais]),
+				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Personalização Adicionada", {{"Localização", type text}}, "pt-BR")
+				in
+				    #"Tipo Alterado com Localidade"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

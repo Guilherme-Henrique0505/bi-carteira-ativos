@@ -8,11 +8,6 @@ table f_historico_ativos
 		summarizeBy: none
 		sourceColumn: Data
 
-		variation Variation
-			isDefault
-			relationship: 5d6c0f33-4da4-43c4-9547-3ff1b31c1bfb
-			defaultHierarchy: LocalDateTable_b49fac9b-2f9c-4e74-8a6e-358ecf384d44.'Hierarquia de datas'
-
 		annotation SummarizationSetBy = Automatic
 
 	column Ticker
