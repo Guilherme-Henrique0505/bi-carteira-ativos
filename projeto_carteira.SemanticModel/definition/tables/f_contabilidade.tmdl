@@ -1,0 +1,97 @@
+table f_contabilidade
+	lineageTag: d167c08b-fce2-4b58-bd87-9712fb3015d9
+
+	column Ticker
+		dataType: string
+		lineageTag: a0a181a4-ec89-41b2-a72e-807253fa5bfc
+		summarizeBy: none
+		sourceColumn: Ticker
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Referencia
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4853d104-b79f-4134-bdf3-20f962da1fe8
+		summarizeBy: none
+		sourceColumn: Data_Referencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lucro_Liquido
+		dataType: double
+		lineageTag: 2d872f85-ab13-4225-866a-bde6a0cca372
+		summarizeBy: sum
+		sourceColumn: Lucro_Liquido
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Receita_Liquida
+		dataType: double
+		lineageTag: b11f9c20-a281-4e42-944f-d1d77ef4e575
+		summarizeBy: sum
+		sourceColumn: Receita_Liquida
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EBITDA
+		dataType: double
+		lineageTag: 9008db9f-7938-4a05-9941-105a25d03fcf
+		summarizeBy: sum
+		sourceColumn: EBITDA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Patrimonio_Liquido
+		dataType: double
+		lineageTag: f277ff90-aaf7-443c-bf10-6b590a7d129b
+		summarizeBy: sum
+		sourceColumn: Patrimonio_Liquido
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Divida_Total
+		dataType: double
+		lineageTag: 03ba48be-e0e7-4c5d-9775-64242019c5ef
+		summarizeBy: sum
+		sourceColumn: Divida_Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Caixa
+		dataType: double
+		lineageTag: 7696b754-a841-402d-acb2-be3e582767af
+		summarizeBy: sum
+		sourceColumn: Caixa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition f_contabilidade = m
+		mode: import
+		source =
+				let
+				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)#(lf)# Caminho absoluto para o seu banco de dados#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)conn = sqlite3.connect(caminho_db)#(lf)#(lf)# Puxamos a nova tabela de contabilidade#(lf)query = ""SELECT * FROM f_contabilidade_trimestral""#(lf)df_contabil = pd.read_sql_query(query, conn)#(lf)#(lf)conn.close()"),
+				    df_contabil1 = Fonte{[Name="df_contabil"]}[Value],
+				    #"Valor Substituído" = Table.ReplaceValue(df_contabil1,"","0",Replacer.ReplaceValue,{"Net Income", "Total Revenue", "EBITDA", "Stockholders Equity", "Total Debt", "Cash And Cash Equivalents"}),
+				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Valor Substituído", {{"Net Income", type number}, {"Total Revenue", type number}, {"EBITDA", type number}, {"Stockholders Equity", type number}, {"Total Debt", type number}, {"Cash And Cash Equivalents", type number}}, "en-US"),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado com Localidade",{{"Total Revenue", "Receita_Liquida"}, {"Net Income", "Lucro_Liquido"}, {"Stockholders Equity", "Patrimonio_Liquido"}, {"Total Debt", "Divida_Total"}, {"Cash And Cash Equivalents", "Caixa"}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Data_Referencia", type datetime}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

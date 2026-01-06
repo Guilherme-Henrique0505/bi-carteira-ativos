@@ -49,27 +49,20 @@ table d_empresas
 
 		annotation SummarizationSetBy = Automatic
 
-	column Funcionarios
-		dataType: string
-		lineageTag: fb74c335-fbe3-49aa-a8e0-c89732f056e2
-		summarizeBy: none
-		sourceColumn: Funcionarios
-
-		annotation SummarizationSetBy = Automatic
-
-	column Resumo
-		dataType: string
-		lineageTag: f790b84d-11d0-4e5e-a49d-75d2d0a1e27f
-		summarizeBy: none
-		sourceColumn: Resumo
-
-		annotation SummarizationSetBy = Automatic
-
 	column Localização
 		dataType: string
 		lineageTag: 9a0d39ab-23d8-4948-a155-9def3718a6b8
 		summarizeBy: none
 		sourceColumn: Localização
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valor_Mercado
+		dataType: int64
+		formatString: 0
+		lineageTag: 36ed9979-4a47-4230-918b-7fa9f9fb6f82
+		summarizeBy: sum
+		sourceColumn: Valor_Mercado
 
 		annotation SummarizationSetBy = Automatic
 
@@ -80,9 +73,10 @@ table d_empresas
 				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)conn = sqlite3.connect(caminho_db)#(lf)#(lf)df_empresas = pd.read_sql_query(""SELECT * FROM d_empresa"", conn)#(lf)conn.close()"),
 				    df_empresas1 = Fonte{[Name="df_empresas"]}[Value],
 				    #"Personalização Adicionada" = Table.AddColumn(df_empresas1, "Localização", each [Cidade] & " - " & [Estado] & " - " & [Pais]),
-				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Personalização Adicionada", {{"Localização", type text}}, "pt-BR")
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"Market_Cap", Int64.Type}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Market_Cap", "Valor_Mercado"}})
 				in
-				    #"Tipo Alterado com Localidade"
+				    #"Colunas Renomeadas"
 
 	annotation PBI_NavigationStepName = Navegação
 

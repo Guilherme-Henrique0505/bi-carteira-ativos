@@ -5,15 +5,16 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 24.799999237060547
+        "y": 13.529598751111326
       },
       "nodes": [
         {
           "location": {
             "x": 0,
-            "y": 26
+            "y": 187.75464563799517
           },
           "nodeIndex": "f_historico_ativos",
+          "nodeLineageTag": "676c47ab-1203-4925-bf79-955121d2cdf0",
           "size": {
             "height": 248,
             "width": 234
@@ -22,8 +23,8 @@
         },
         {
           "location": {
-            "x": 273,
-            "y": 290
+            "x": 246.22267020246102,
+            "y": 541.95196706128445
           },
           "nodeIndex": "d_calendario",
           "nodeLineageTag": "c54831c4-8f54-4c68-a074-e5e8ef852b7c",
@@ -35,8 +36,8 @@
         },
         {
           "location": {
-            "x": 568,
-            "y": 2
+            "x": 451.02534877917162,
+            "y": 0
           },
           "nodeIndex": "d_empresas",
           "nodeLineageTag": "78b3aba1-9fd4-4848-93c6-f2045e0de67c",
@@ -45,10 +46,36 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 244.5
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "cbd163e5-22f2-4e39-b142-49d024247aab",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 677.68486481885463,
+            "y": 335.10291874785327
+          },
+          "nodeIndex": "f_contabilidade",
+          "nodeLineageTag": "d167c08b-fce2-4b58-bd87-9712fb3015d9",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",
-      "zoomValue": 100,
+      "zoomValue": 70.95554390096882,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

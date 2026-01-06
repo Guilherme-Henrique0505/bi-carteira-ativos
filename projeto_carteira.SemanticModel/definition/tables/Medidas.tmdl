@@ -1,0 +1,121 @@
+table Medidas
+	lineageTag: cbd163e5-22f2-4e39-b142-49d024247aab
+
+	measure 'Preço Atual' =
+			
+			VAR UltimaData = MAX(f_historico_ativos[Data])
+			RETURN
+			CALCULATE(SUM(f_historico_ativos[Close]), f_historico_ativos[Data] = UltimaData)
+		formatString: 0
+		lineageTag: 1249c088-26df-4443-bd09-d7e580fc5cac
+
+	measure 'Var % Diária' =
+			
+			VAR Atual = [Preço Atual]
+			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
+			RETURN
+			DIVIDE(Atual - Ontem, Ontem)
+		lineageTag: 86143d71-320f-410f-a738-81243fc2e1c5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Máxima Período' = MAXX(f_historico_ativos, f_historico_ativos[High])
+		lineageTag: 57946615-4d6a-458d-a806-337cc765f4f9
+
+	measure 'Mínima Período' = MINX(f_historico_ativos, f_historico_ativos[Low])
+		lineageTag: 380ce1e1-ce56-473b-9c70-c99867476d50
+
+	measure 'Var Diária R$' =
+			
+			VAR Atual = [Preço Atual]
+			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
+			RETURN
+			IF(ISBLANK(Ontem), 0, Atual - Ontem)
+		formatString: 0
+		lineageTag: c2f1059b-79b4-45bd-8e41-52ee33d3dec2
+
+	measure 'Retorno Acumulado %' =
+			
+			VAR PrecoInicial = CALCULATE([Preço Atual], FIRSTDATE(d_Calendario[Data]))
+			VAR PrecoFinal = [Preço Atual]
+			RETURN
+			DIVIDE(PrecoFinal - PrecoInicial, PrecoInicial, 0)
+		lineageTag: 9ffe61d8-fd11-4bdb-8f6e-e4ba7a1ba28d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ROE = ```
+			
+			DIVIDE(
+			    SUM(f_contabilidade[Lucro_Liquido]), 
+			    SUM(f_contabilidade[Patrimonio_Liquido]), 
+			    0
+			)
+			```
+		lineageTag: 3552af14-c454-4e09-9cd0-2e98d31d7ab9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margem Líquida (Trimestral)' = ```
+			
+			DIVIDE(
+			    SUM(f_contabilidade[Lucro_Liquido]), 
+			    SUM(f_contabilidade[Receita_Liquida]), 
+			    0
+			)
+			```
+		lineageTag: 6595b599-da92-4670-971c-9aa2ed4842d4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure EBITDA = SUM(f_contabilidade[EBITDA])
+		lineageTag: d878f238-8011-400d-96d0-7eba459b0dd3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dívida / EBITDA' = ```
+			
+			DIVIDE(
+			    SUM(f_contabilidade[Divida_Total]), 
+			    [EBITDA], 
+			    0
+			)
+			```
+		lineageTag: ad8eef1a-e25b-40b8-b4a9-0483afbb01e6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'P/L Atual' = ```
+			
+			DIVIDE(
+			    SUM(d_empresas[Valor_Mercado]), 
+			    SUM(f_contabilidade[Lucro_Liquido]), 
+			    0
+			)
+			```
+		lineageTag: 5a2f68fe-dabc-4ba1-aa01-18253a26adf6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column medidas
+		dataType: string
+		isHidden
+		lineageTag: 38f106c2-5351-4760-b4a9-26c8e55e539a
+		summarizeBy: none
+		sourceColumn: medidas
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [medidas = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"medidas", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

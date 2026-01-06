@@ -15,11 +15,10 @@ def atualizar_dimensao_empresas(lista_tickers):
                 'Ticker': ticker,
                 'Empresa': info.get('longName'),
                 'Setor': info.get('sector'),
+                'Market_Cap': info.get('marketCap'), # Este é o Valor de Mercado atual
                 'Cidade': info.get('city'),
                 'Estado': info.get('state'),
-                'Pais': info.get('country'),
-                'Funcionarios': info.get('fullTimeEmployees'),
-                'Resumo': info.get('longBusinessSummary') # Opcional: descrição do que a empresa faz
+                'Pais': info.get('country')
             })
         except Exception as e:
             print(f"Erro ao puxar {ticker}: {e}")

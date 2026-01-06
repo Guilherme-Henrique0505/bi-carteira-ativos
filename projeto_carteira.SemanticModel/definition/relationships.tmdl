@@ -21,3 +21,11 @@ relationship 1839b9f2-5ba6-654b-0a27-0572eda018d0
 	fromColumn: f_historico_ativos.Data
 	toColumn: d_calendario.Data
 
+relationship AutoDetected_bb646b92-98e0-492b-90b9-bb64a38144cf
+	fromColumn: f_contabilidade.Ticker
+	toColumn: d_empresas.Ticker
+
+relationship ecca6634-d2dc-7288-c56c-40ffe738f1dd
+	fromColumn: f_contabilidade.Data_Referencia
+	toColumn: d_calendario.Data
+

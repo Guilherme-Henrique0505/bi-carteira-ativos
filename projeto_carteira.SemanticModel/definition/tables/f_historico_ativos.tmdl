@@ -19,41 +19,54 @@ table f_historico_ativos
 		annotation SummarizationSetBy = Automatic
 
 	column Close
-		dataType: string
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 56604425-8b09-46c0-a785-e3548d947b8f
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Close
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	column High
-		dataType: string
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 3530f014-746a-41f0-b1a2-68f234b90ba3
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: High
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	column Low
-		dataType: string
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 00b25e39-a8d7-4fbd-bc1e-bb56e300409c
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Low
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	column Open
-		dataType: string
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 9930304f-995d-4d7d-bf2b-97d1a01dde20
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Open
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	column Volume
-		dataType: string
+		dataType: int64
+		formatString: #,0
 		lineageTag: f6d07fe0-07d3-4d5d-a904-88281a06a67f
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Volume
 
 		annotation SummarizationSetBy = Automatic
@@ -64,7 +77,8 @@ table f_historico_ativos
 				let
 				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)import os#(lf)#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)if os.path.exists(caminho_db):#(lf)    conn = sqlite3.connect(caminho_db)#(lf)    df = pd.read_sql_query(""SELECT * FROM historico_ativos"", conn)#(lf)    conn.close()#(lf)else:#(lf)    raise FileNotFoundError(f""Arquivo nao encontrado no caminho: {caminho_db}"")"),
 				    df1 = Fonte{[Name="df"]}[Value],
-				    #"Tipo Alterado" = Table.TransformColumnTypes(df1,{{"Data", type datetime}})
+				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(df1, {{"Open", type number}, {"Low", type number}, {"High", type number}, {"Close", type number}}, "en-US"),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade",{{"Data", type datetime}, {"Volume", Int64.Type}})
 				in
 				    #"Tipo Alterado"
 
