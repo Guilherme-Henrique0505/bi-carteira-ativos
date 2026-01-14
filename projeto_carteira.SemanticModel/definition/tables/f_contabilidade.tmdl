@@ -20,23 +20,25 @@ table f_contabilidade
 
 	column Lucro_Liquido
 		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 2d872f85-ab13-4225-866a-bde6a0cca372
 		summarizeBy: sum
 		sourceColumn: Lucro_Liquido
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	column Receita_Liquida
 		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: b11f9c20-a281-4e42-944f-d1d77ef4e575
 		summarizeBy: sum
 		sourceColumn: Receita_Liquida
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	column EBITDA
 		dataType: double
@@ -50,13 +52,14 @@ table f_contabilidade
 
 	column Patrimonio_Liquido
 		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: f277ff90-aaf7-443c-bf10-6b590a7d129b
 		summarizeBy: sum
 		sourceColumn: Patrimonio_Liquido
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	column Divida_Total
 		dataType: double

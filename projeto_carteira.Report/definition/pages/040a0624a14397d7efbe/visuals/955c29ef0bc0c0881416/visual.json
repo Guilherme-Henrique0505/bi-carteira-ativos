@@ -7,7 +7,7 @@
     "z": 6000,
     "height": 183.95209580838323,
     "width": 1887.1320887636491,
-    "tabOrder": 6000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "tableEx",
@@ -112,6 +112,63 @@
               },
               "queryRef": "Medidas.ROE",
               "nativeQueryRef": "ROE"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "f_contabilidade"
+                        }
+                      },
+                      "Property": "Lucro_Liquido"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(f_contabilidade.Lucro_Liquido)",
+              "nativeQueryRef": "Soma de Lucro_Liquido"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "f_contabilidade"
+                        }
+                      },
+                      "Property": "Patrimonio_Liquido"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(f_contabilidade.Patrimonio_Liquido)",
+              "nativeQueryRef": "Soma de Patrimonio_Liquido"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "f_contabilidade"
+                        }
+                      },
+                      "Property": "Receita_Liquida"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(f_contabilidade.Receita_Liquida)",
+              "nativeQueryRef": "Soma de Receita_Liquida"
             }
           ]
         }

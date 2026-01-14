@@ -7,7 +7,7 @@
     "z": 7000,
     "height": 297.82677165354329,
     "width": 615.30708661417316,
-    "tabOrder": 7000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "donutChart",
@@ -148,9 +148,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": 0.4
+                    "Literal": {
+                      "Value": "'#70BBFF'"
                     }
                   }
                 }

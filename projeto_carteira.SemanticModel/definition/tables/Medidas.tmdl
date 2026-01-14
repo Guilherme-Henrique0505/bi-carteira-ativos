@@ -22,10 +22,7 @@ table Medidas
 
 	measure 'Var Diária R$' =
 			
-			VAR Atual = [Preço Atual]
-			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
-			RETURN
-			IF(ISBLANK(Ontem), 0, Atual - Ontem)
+			[Preço Atual] - [Preço Dia Anterior]
 		formatString: 0
 		lineageTag: c2f1059b-79b4-45bd-8e41-52ee33d3dec2
 
@@ -62,8 +59,10 @@ table Medidas
 		lineageTag: 6595b599-da92-4670-971c-9aa2ed4842d4
 
 	measure EBITDA = SUM(f_contabilidade[EBITDA])
-		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: d878f238-8011-400d-96d0-7eba459b0dd3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	measure 'Dívida / EBITDA' = ```
 			
@@ -89,12 +88,9 @@ table Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Var %' =
+	measure 'Var % Absoluta' =
 			
-			VAR Atual = [Preço Atual]
-			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
-			RETURN
-			DIVIDE(Atual - Ontem, Ontem, 0)
+			DIVIDE([Preço Atual] - [Preço Dia Anterior], [Preço Dia Anterior], 0)
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 6852717a-22f9-4a01-a191-b1fcc33b465c
 
@@ -124,6 +120,386 @@ table Medidas
 			</div>"
 			```
 		lineageTag: 95773721-2772-4e01-8af5-487d8ba47369
+
+	measure 'crd_Volume Medio' = ```
+			
+			-- 1. VARIÁVEIS DE CONTEÚDO
+			VAR vTitulo = "Volume Médio"
+			VAR vValor = FORMAT([Volume Médio], "#,##")
+			VAR vIconeSVG = "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-bank2' viewBox='0 0 16 16'>
+			  <path d='M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916zM12.375 6v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2M.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1z'/>
+			</svg>"
+			
+			-- 2. VARIÁVEIS DE CORES E ESTILO
+			VAR vCorFundo = "#2E2E2E"
+			VAR vCorTexto = "#fff"
+			VAR vCorHoverFundo = "#70BBFF"
+			VAR vCorHoverTexto = "#fff"
+			
+			-- 3. CÓDIGO HTML/CSS
+			VAR Template = "
+			<style>
+			    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+			
+			    .card-container {
+			        font-family: 'Inter', sans-serif;
+			        background-color: " & vCorFundo & ";
+			        padding: 5%;
+			        display: flex;
+			        flex-direction: column;
+			        align-items: center;
+			        justify-content: center;
+			        gap: 4%;
+			        width: 100%; 
+			        height: 138px;
+			        box-sizing: border-box;
+			        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			        transition: all 0.3s ease;
+			        color: " & vCorTexto & ";
+			        cursor: pointer;
+			        overflow: hidden;
+			    }
+			
+			    .title {
+			        font-size: 20px;
+			        font-weight: bold;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .icon-svg {
+			        width: clamp(20px, 15%, 44px);
+			        height: auto;
+			        display: flex;
+			        align-items: center;
+			        justify-content: center;
+			        flex-shrink: 0;
+			    }
+			
+			    .icon-svg svg {
+			        fill: currentColor;
+			        width: 100%;
+			        height: 100%;
+			    }
+			
+			    .value {
+			        font-size: 27px;
+			        font-weight: normal;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .card-container:hover {
+			        background-color: " & vCorHoverFundo & ";
+			        color: " & vCorHoverTexto & ";
+			    }
+			</style>
+			
+			<div class='card-container'>
+			    <div class='title'>" & vTitulo & "</div>
+			    
+			    <div class='icon-svg'>" & vIconeSVG & "</div>
+			
+			    <div class='value'>" & vValor & "</div>
+			</div>
+			"
+			
+			RETURN Template
+			```
+		lineageTag: ad6a2972-2cc4-49ea-bf0b-371dc2dfcd8a
+
+	measure 'crd_Máxima Período' = ```
+			
+			-- 1. VARIÁVEIS DE CONTEÚDO
+			VAR vTitulo = "Máxima Período"
+			VAR vValor = FORMAT([Máxima Período], "R$ #.##")
+			VAR vIconeSVG = "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-hourglass-top' viewBox='0 0 16 16'>
+			  <path d='M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5m2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1z'/>
+			</svg>"
+			
+			-- 2. VARIÁVEIS DE CORES E ESTILO
+			VAR vCorFundo = "#2E2E2E"
+			VAR vCorTexto = "#fff"
+			VAR vCorHoverFundo = "#70BBFF"
+			VAR vCorHoverTexto = "#fff"
+			
+			-- 3. CÓDIGO HTML/CSS
+			VAR Template = "
+			<style>
+			    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+			
+			    .card-container {
+			        font-family: 'Inter', sans-serif;
+			        background-color: " & vCorFundo & ";
+			        padding: 5%;
+			        display: flex;
+			        flex-direction: column;
+			        align-items: center;
+			        justify-content: center;
+			        gap: 4%;
+			        width: 100%; 
+			        height: 138px;
+			        box-sizing: border-box;
+			        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			        transition: all 0.3s ease;
+			        color: " & vCorTexto & ";
+			        cursor: pointer;
+			        overflow: hidden;
+			    }
+			
+			    .title {
+			        font-size: 20px;
+			        font-weight: bold;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .icon-svg {
+			        width: clamp(20px, 15%, 44px);
+			        height: auto;
+			        display: flex;
+			        align-items: center;
+			        justify-content: center;
+			        flex-shrink: 0;
+			    }
+			
+			    .icon-svg svg {
+			        fill: currentColor;
+			        width: 100%;
+			        height: 100%;
+			    }
+			
+			    .value {
+			        font-size: 27px;
+			        font-weight: normal;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .card-container:hover {
+			        background-color: " & vCorHoverFundo & ";
+			        color: " & vCorHoverTexto & ";
+			    }
+			</style>
+			
+			<div class='card-container'>
+			    <div class='title'>" & vTitulo & "</div>
+			    
+			    <div class='icon-svg'>" & vIconeSVG & "</div>
+			
+			    <div class='value'>" & vValor & "</div>
+			</div>
+			"
+			
+			RETURN Template
+			```
+		lineageTag: 3d261c82-01b2-4167-b999-522fff70da03
+
+	measure 'crd_Var % Absoluta' = ```
+			
+			-- 1. VARIÁVEIS DE CONTEÚDO
+			VAR vTitulo = "Variação %"
+			VAR vValor = FORMAT([Var % Absoluta], "percent")
+			VAR vIconeSVG = "<svg viewBox='0 0 16 16'><path d='M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0'/><path fill-rule='evenodd' d='M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1'/></svg>"
+			
+			-- 2. VARIÁVEIS DE CORES E ESTILO
+			VAR vCorFundo = "#2E2E2E"
+			VAR vCorTexto = "#fff"
+			VAR vCorHoverFundo = "#70BBFF"
+			VAR vCorHoverTexto = "#fff"
+			
+			-- 3. CÓDIGO HTML/CSS
+			VAR Template = "
+			<style>
+			    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+			
+			    .card-container {
+			        font-family: 'Inter', sans-serif;
+			        background-color: " & vCorFundo & ";
+			        padding: 5%;
+			        display: flex;
+			        flex-direction: column;
+			        align-items: center;
+			        justify-content: center;
+			        gap: 4%;
+			        width: 100%; 
+			        height: 138px;
+			        box-sizing: border-box;
+			        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			        transition: all 0.3s ease;
+			        color: " & vCorTexto & ";
+			        cursor: pointer;
+			        overflow: hidden;
+			    }
+			
+			    .title {
+			        font-size: 20px;
+			        font-weight: bold;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .icon-svg {
+			        width: clamp(20px, 15%, 44px);
+			        height: auto;
+			        display: flex;
+			        align-items: center;
+			        justify-content: center;
+			        flex-shrink: 0;
+			    }
+			
+			    .icon-svg svg {
+			        fill: currentColor;
+			        width: 100%;
+			        height: 100%;
+			    }
+			
+			    .value {
+			        font-size: 27px;
+			        font-weight: normal;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .card-container:hover {
+			        background-color: " & vCorHoverFundo & ";
+			        color: " & vCorHoverTexto & ";
+			    }
+			</style>
+			
+			<div class='card-container'>
+			    <div class='title'>" & vTitulo & "</div>
+			    
+			    <div class='icon-svg'>" & vIconeSVG & "</div>
+			
+			    <div class='value'>" & vValor & "</div>
+			</div>
+			"
+			
+			RETURN Template
+			```
+		lineageTag: 2b654e39-9799-4328-9f59-e7dd6600a72e
+
+	measure 'crd_Preço Atual' = ```
+			
+			-- 1. VARIÁVEIS DE CONTEÚDO
+			VAR vTitulo = "Preço Atual"
+			VAR vValor = FORMAT([Preço Atual], "R$ #.##")
+			VAR vIconeSVG = "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-coin' viewBox='0 0 16 16'>
+			  <path d='M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z'/>
+			  <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16'/>
+			  <path d='M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12'/>
+			</svg>"
+			
+			-- 2. VARIÁVEIS DE CORES E ESTILO
+			VAR vCorFundo = "#2E2E2E"
+			VAR vCorTexto = "#fff"
+			VAR vCorHoverFundo = "#70BBFF"
+			VAR vCorHoverTexto = "#fff"
+			
+			-- 3. CÓDIGO HTML/CSS
+			VAR Template = "
+			<style>
+			    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+			
+			    .card-container {
+			        font-family: 'Inter', sans-serif;
+			        background-color: " & vCorFundo & ";
+			        padding: 5%;
+			        display: flex;
+			        flex-direction: column;
+			        align-items: center;
+			        justify-content: center;
+			        gap: 4%;
+			        width: 100%; 
+			        height: 138px;
+			        box-sizing: border-box;
+			        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			        transition: all 0.3s ease;
+			        color: " & vCorTexto & ";
+			        cursor: pointer;
+			        overflow: hidden;
+			    }
+			
+			    .title {
+			        font-size: 20px;
+			        font-weight: bold;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .icon-svg {
+			        width: clamp(20px, 15%, 44px);
+			        height: auto;
+			        display: flex;
+			        align-items: center;
+			        justify-content: center;
+			        flex-shrink: 0;
+			    }
+			
+			    .icon-svg svg {
+			        fill: currentColor;
+			        width: 100%;
+			        height: 100%;
+			    }
+			
+			    .value {
+			        font-size: 27px;
+			        font-weight: normal;
+			        margin: 0;
+			        padding: 0;
+			        text-align: center;
+			    }
+			
+			    .card-container:hover {
+			        background-color: " & vCorHoverFundo & ";
+			        color: " & vCorHoverTexto & ";
+			    }
+			</style>
+			
+			<div class='card-container'>
+			    <div class='title'>" & vTitulo & "</div>
+			    
+			    <div class='icon-svg'>" & vIconeSVG & "</div>
+			
+			    <div class='value'>" & vValor & "</div>
+			</div>
+			"
+			
+			RETURN Template
+			```
+		lineageTag: cc55dee8-8965-4b1a-8222-7026a3c4dcea
+
+	measure 'Preço Dia Anterior' = ```
+			
+			VAR DataAtual = MAX(f_historico_ativos[Data])
+			
+			VAR DataAnterior = 
+			    CALCULATE(
+			        MAX(f_historico_ativos[Data]),
+			        FILTER(
+			            ALL(d_Calendario),
+			            d_Calendario[Data] < DataAtual &&
+			            NOT(ISBLANK([Preço Atual]))
+			        )
+			    )
+			
+			RETURN
+			CALCULATE(
+			    [Preço Atual],
+			    d_Calendario[Data] = DataAnterior
+			)
+			```
+		lineageTag: 3f040640-34f7-4c15-b627-d982eabbd705
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column medidas
 		dataType: string
