@@ -9,16 +9,6 @@ table Medidas
 		formatString: 0
 		lineageTag: 1249c088-26df-4443-bd09-d7e580fc5cac
 
-	measure 'Var % Diária' =
-			
-			VAR Atual = [Preço Atual]
-			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
-			RETURN
-			DIVIDE(Atual - Ontem, Ontem)
-		lineageTag: 86143d71-320f-410f-a738-81243fc2e1c5
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure 'Máxima Período' = MAXX(f_historico_ativos, f_historico_ativos[High])
 		lineageTag: 57946615-4d6a-458d-a806-337cc765f4f9
 
@@ -52,9 +42,8 @@ table Medidas
 			    0
 			)
 			```
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 3552af14-c454-4e09-9cd0-2e98d31d7ab9
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Margem Líquida (Trimestral)' = ```
 			
@@ -64,14 +53,12 @@ table Medidas
 			    0
 			)
 			```
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 6595b599-da92-4670-971c-9aa2ed4842d4
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure EBITDA = SUM(f_contabilidade[EBITDA])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: d878f238-8011-400d-96d0-7eba459b0dd3
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Dívida / EBITDA' = ```
 			
@@ -94,6 +81,21 @@ table Medidas
 			)
 			```
 		lineageTag: 5a2f68fe-dabc-4ba1-aa01-18253a26adf6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var %' =
+			
+			VAR Atual = [Preço Atual]
+			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
+			RETURN
+			DIVIDE(Atual - Ontem, Ontem, 0)
+		lineageTag: 6852717a-22f9-4a01-a191-b1fcc33b465c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Volume Médio' = AVERAGE(f_historico_ativos[Volume])
+		lineageTag: e5a048e9-c42e-4a71-9019-d2e7dd728132
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
