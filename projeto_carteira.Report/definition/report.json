@@ -46,6 +46,9 @@
       }
     ]
   },
+  "publicCustomVisuals": [
+    "htmlContent443BE3AD55E043BF878BED274D3A6855"
+  ],
   "resourcePackages": [
     {
       "name": "SharedResources",
@@ -63,13 +66,23 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "An_lise_de_cota__es_(3)14035144777962738.png",
-          "path": "An_lise_de_cota__es_(3)14035144777962738.png",
+          "name": "An_lise_de_cota__es_(6)11974244437394121.png",
+          "path": "An_lise_de_cota__es_(6)11974244437394121.png",
           "type": "Image"
         },
         {
-          "name": "An_lise_de_cota__es_(5)3535945875497746.png",
-          "path": "An_lise_de_cota__es_(5)3535945875497746.png",
+          "name": "Group_1_(1)19753039814312412.png",
+          "path": "Group_1_(1)19753039814312412.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_32890982298804149.png",
+          "path": "Group_32890982298804149.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_25840099263759816.png",
+          "path": "Group_25840099263759816.png",
           "type": "Image"
         }
       ]

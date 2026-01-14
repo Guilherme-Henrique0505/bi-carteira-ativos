@@ -66,6 +66,30 @@ table d_empresas
 
 		annotation SummarizationSetBy = Automatic
 
+	column Logo_URL
+		dataType: string
+		lineageTag: f91a04a2-c3d8-4887-945e-6cb2c0b40184
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Logo_URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column cc_Logo_completa_url =
+			
+			SWITCH(
+			    TRUE(),
+			    d_empresas[Ticker] = "PETR4.SA", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Petrobras_horizontal_logo.svg/330px-Petrobras_horizontal_logo.svg.png",
+			    d_empresas[Ticker] = "VALE3.SA", "https://upload.wikimedia.org/wikipedia/pt/c/cc/Logotipo_Vale.svg",
+			    d_empresas[Ticker] = "ITUB4.SA", "https://www.google.com/s2/favicons?domain=www.itau.com.br&sz=128",
+			    d_empresas[Ticker] = "BBAS3.SA", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Banco_do_Brasil_Logo.svg/500px-Banco_do_Brasil_Logo.svg.png",
+			    d_empresas[Ticker] = "ABEV3.SA", "https://www.ambev.com.br/sites/g/files/wnfebl12286/files/styles/webp/public/2025-01/ambev_azul-2-1_1.png.webp?itok=Yfv2X7yL"
+			)
+		lineageTag: 6e9a0292-a616-4b56-b913-453984f8c769
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition d_empresas = m
 		mode: import
 		source =

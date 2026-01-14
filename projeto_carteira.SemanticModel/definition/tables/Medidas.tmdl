@@ -6,11 +6,16 @@ table Medidas
 			VAR UltimaData = MAX(f_historico_ativos[Data])
 			RETURN
 			CALCULATE(SUM(f_historico_ativos[Close]), f_historico_ativos[Data] = UltimaData)
-		formatString: 0
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 1249c088-26df-4443-bd09-d7e580fc5cac
 
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	measure 'Máxima Período' = MAXX(f_historico_ativos, f_historico_ativos[High])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 57946615-4d6a-458d-a806-337cc765f4f9
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	measure 'Mínima Período' = MINX(f_historico_ativos, f_historico_ativos[Low])
 		lineageTag: 380ce1e1-ce56-473b-9c70-c99867476d50
@@ -98,6 +103,27 @@ table Medidas
 		lineageTag: e5a048e9-c42e-4a71-9019-d2e7dd728132
 
 		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure HTML_Logo_Centralizada = ```
+			
+			VAR LinkLogo = MAX(d_empresas[cc_Logo_completa_url])
+			RETURN
+			"<div style='
+			    display: flex; 
+			    justify-content: center; 
+			    align-items: center; 
+			    width: auto; 
+			    height: auto; 
+			    overflow: hidden;
+			'>
+			    <img src='" & LinkLogo & "' style='
+			        max-width: 90%; 
+			        max-height: auto; 
+			        object-fit: contain;
+			    '>
+			</div>"
+			```
+		lineageTag: 95773721-2772-4e01-8af5-487d8ba47369
 
 	column medidas
 		dataType: string

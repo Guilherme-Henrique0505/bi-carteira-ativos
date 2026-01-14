@@ -10,7 +10,8 @@ def atualizar_dimensao_empresas(lista_tickers):
         try:
             acao = yf.Ticker(ticker)
             info = acao.info
-            
+            site_limpo = info.get('website', '').replace('https://', '').replace('http://', '').split('/')[0]
+
             dados_cadastrais.append({
                 'Ticker': ticker,
                 'Empresa': info.get('longName'),
@@ -18,7 +19,8 @@ def atualizar_dimensao_empresas(lista_tickers):
                 'Market_Cap': info.get('marketCap'), # Este é o Valor de Mercado atual
                 'Cidade': info.get('city'),
                 'Estado': info.get('state'),
-                'Pais': info.get('country')
+                'Pais': info.get('country'),
+                'Logo_URL': f"https://www.google.com/s2/favicons?domain={site_limpo}&sz=128"
             })
         except Exception as e:
             print(f"Erro ao puxar {ticker}: {e}")
