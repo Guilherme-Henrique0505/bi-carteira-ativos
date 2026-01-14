@@ -57,6 +57,22 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "An_lise_de_cota__es_(3)14035144777962738.png",
+          "path": "An_lise_de_cota__es_(3)14035144777962738.png",
+          "type": "Image"
+        },
+        {
+          "name": "An_lise_de_cota__es_(5)3535945875497746.png",
+          "path": "An_lise_de_cota__es_(5)3535945875497746.png",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {

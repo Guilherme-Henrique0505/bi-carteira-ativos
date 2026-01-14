@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "7c15cd72007583a14a03",
+  "name": "b46f25f5c18d5bcd0be4",
   "position": {
-    "x": 37.795275590551178,
-    "y": 557.85826771653535,
+    "x": 661.57303370786519,
+    "y": 541.12359550561791,
     "z": 9000,
-    "height": 282.70866141732284,
-    "width": 585.07086614173227,
+    "height": 298.42696629213481,
+    "width": 586.06741573033707,
     "tabOrder": 9000
   },
   "visual": {
@@ -135,7 +135,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -187,9 +187,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": 0.2
+                    "Literal": {
+                      "Value": "'#6CB57C'"
                     }
                   }
                 }
@@ -205,7 +204,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "11D"
                 }
               }
             },
@@ -213,6 +212,23 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6CB57C'"
+                    }
+                  }
                 }
               }
             }

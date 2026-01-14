@@ -1,19 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "7c15cd72007583a14a03",
+  "name": "3baea3a4382001e7d56a",
   "position": {
-    "x": 37.795275590551178,
-    "y": 557.85826771653535,
-    "z": 9000,
-    "height": 282.70866141732284,
-    "width": 585.07086614173227,
-    "tabOrder": 9000
+    "x": 1652.4094488188975,
+    "y": 4.5354330708661417,
+    "z": 9001,
+    "height": 57.448818897637793,
+    "width": 220.72440944881888,
+    "tabOrder": 9001
   },
   "visual": {
-    "visualType": "columnChart",
+    "visualType": "slicer",
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -65,81 +65,116 @@
               },
               "queryRef": "d_calendario.Data.Variation.Hierarquia de datas.Mês",
               "nativeQueryRef": "Data Mês",
-              "active": false
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
+              "active": true
+            },
             {
               "field": {
-                "Measure": {
+                "HierarchyLevel": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Medidas"
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "d_calendario"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "Data"
+                        }
+                      },
+                      "Hierarchy": "Hierarquia de datas"
                     }
                   },
-                  "Property": "Volume Médio"
+                  "Level": "Dia"
                 }
               },
-              "queryRef": "Medidas.Volume Médio",
-              "nativeQueryRef": "Volume Médio"
+              "queryRef": "d_calendario.Data.Variation.Hierarquia de datas.Dia",
+              "nativeQueryRef": "Data Dia",
+              "active": false
             }
           ]
         }
       }
     },
+    "expansionStates": [
+      {
+        "roles": [
+          "Values"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "d_calendario.Data.Variation.Hierarquia de datas.Ano"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LocalDateTable_3f9157ed-2ce0-4e5d-a187-969c16905c45"
+                    }
+                  },
+                  "Property": "Ano"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "d_calendario.Data.Variation.Hierarquia de datas.Mês"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "d_calendario.Data.Variation.Hierarquia de datas.Dia"
+            ],
+            "isCollapsed": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "2025L"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
     "objects": {
-      "categoryAxis": [
+      "data": [
         {
           "properties": {
-            "showAxisTitle": {
+            "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "labelColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
+                  "Value": "'Dropdown'"
                 }
               }
             }
           }
         }
       ],
-      "valueAxis": [
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "header": [
         {
           "properties": {
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "labelColor": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
@@ -154,17 +189,10 @@
           }
         }
       ],
-      "labels": [
+      "items": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
@@ -176,43 +204,14 @@
                 }
               }
             },
-            "enableBackground": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "backgroundColor": {
+            "background": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": 0.2
+                    "Literal": {
+                      "Value": "'#2E2E2E'"
                     }
                   }
-                }
-              }
-            },
-            "backgroundTransparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "30L"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            },
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
                 }
               }
             }

@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "30979953a05280bcc36a",
+  "name": "d9ad704346be200a68a6",
   "position": {
-    "x": 642.51968503937007,
-    "y": 542.74015748031491,
+    "x": 17.313138429024303,
+    "y": 541.0355759070095,
     "z": 8000,
-    "height": 297.82677165354329,
-    "width": 615.30708661417316,
+    "height": 298.65163790066924,
+    "width": 614.61641423036281,
     "tabOrder": 8000
   },
   "visual": {
@@ -138,6 +138,49 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6CB57C'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "d_empresas"
+                          }
+                        },
+                        "Property": "Setor"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Consumer Defensive'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       ]

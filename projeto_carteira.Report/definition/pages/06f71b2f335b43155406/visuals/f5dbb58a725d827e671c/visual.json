@@ -1,38 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "30979953a05280bcc36a",
+  "name": "f5dbb58a725d827e671c",
   "position": {
-    "x": 642.51968503937007,
-    "y": 542.74015748031491,
-    "z": 8000,
-    "height": 297.82677165354329,
-    "width": 615.30708661417316,
-    "tabOrder": 8000
+    "x": 331.11377245508982,
+    "y": 69.252553716097211,
+    "z": 1000,
+    "height": 140.66924973582246,
+    "width": 300.81578020429725,
+    "tabOrder": 1000
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "d_empresas"
-                    }
-                  },
-                  "Property": "Setor"
-                }
-              },
-              "queryRef": "d_empresas.Setor",
-              "nativeQueryRef": "Setor",
-              "active": true
-            }
-          ]
-        },
-        "Y": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -42,11 +23,11 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Volume Médio"
+                  "Property": "Var %"
                 }
               },
-              "queryRef": "Medidas.Volume Médio",
-              "nativeQueryRef": "Volume Médio"
+              "queryRef": "Medidas.Var %",
+              "nativeQueryRef": "Var %"
             }
           ]
         }
@@ -61,7 +42,7 @@
                     "Entity": "Medidas"
                   }
                 },
-                "Property": "Volume Médio"
+                "Property": "Var %"
               }
             },
             "direction": "Descending"
@@ -71,32 +52,17 @@
       }
     },
     "objects": {
-      "legend": [
+      "categoryLabels": [
         {
           "properties": {
-            "labelColor": {
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#6CB57C'"
                     }
                   }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            },
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'BottomCenter'"
                 }
               }
             }
@@ -110,31 +76,10 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#6CB57C'"
                     }
                   }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 1
-                }
-              }
-            ]
-          }
-        },
-        {
-          "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11D"
                 }
               }
             }

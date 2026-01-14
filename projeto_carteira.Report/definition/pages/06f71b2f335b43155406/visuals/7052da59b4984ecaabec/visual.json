@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "c02c6ab457577131c406",
+  "name": "7052da59b4984ecaabec",
   "position": {
-    "x": 1431.6850393700786,
-    "y": 4.5354330708661417,
+    "x": 512.35955056179773,
+    "y": 0,
     "z": 6000,
-    "height": 57.448818897637793,
-    "width": 220.72440944881888,
+    "height": 57.528089887640448,
+    "width": 411.68539325842693,
     "tabOrder": 6000
   },
   "visual": {
@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Petróleo Brasileiro S.A. - Petrobras'"
+                                "Value": "'Ambev S.A.'"
                               }
                             }
                           ]
@@ -133,7 +133,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2E2E2E'"
+                      "Value": "'#9DA79A'"
                     }
                   }
                 }

@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "e322c4c60ae15a761e04",
+  "name": "5b4885036a30b892336a",
   "position": {
     "x": 16.629921259842519,
-    "y": 302.36220472440942,
+    "y": 284.22047244094489,
     "z": 5000,
-    "height": 181.41732283464566,
+    "height": 241.88976377952756,
     "width": 1251.7795275590549,
     "tabOrder": 5000
   },
@@ -246,13 +246,6 @@
                   "Value": "false"
                 }
               }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
             }
           }
         }
@@ -282,7 +275,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -297,6 +290,18 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
                 }
               }
             }
@@ -343,9 +348,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": 0.2
+                    "Literal": {
+                      "Value": "'#6CB57C'"
                     }
                   }
                 }
@@ -364,6 +368,26 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6CB57C'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(f_historico_ativos.Close)"
           }
         }
       ]

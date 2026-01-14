@@ -90,14 +90,14 @@ table Medidas
 			VAR Ontem = CALCULATE([Preço Atual], DATEADD(d_Calendario[Data], -1, DAY))
 			RETURN
 			DIVIDE(Atual - Ontem, Ontem, 0)
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 6852717a-22f9-4a01-a191-b1fcc33b465c
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure 'Volume Médio' = AVERAGE(f_historico_ativos[Volume])
+		formatString: #,0
 		lineageTag: e5a048e9-c42e-4a71-9019-d2e7dd728132
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column medidas
 		dataType: string
