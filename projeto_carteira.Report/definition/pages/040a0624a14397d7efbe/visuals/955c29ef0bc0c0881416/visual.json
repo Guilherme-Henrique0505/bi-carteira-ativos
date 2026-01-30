@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "955c29ef0bc0c0881416",
   "position": {
-    "x": 17.313138429024303,
-    "y": 859.164494540331,
+    "x": 16.179775280898877,
+    "y": 859.32584269662914,
     "z": 6000,
-    "height": 183.95209580838323,
-    "width": 1887.1320887636491,
+    "height": 183.37078651685391,
+    "width": 1887.6404494382023,
     "tabOrder": 2000
   },
   "visual": {
@@ -65,39 +65,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "P/L Atual"
-                }
-              },
-              "queryRef": "Medidas.P/L Atual",
-              "nativeQueryRef": "P/L Atual"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Medidas"
-                    }
-                  },
                   "Property": "Margem Líquida (Trimestral)"
                 }
               },
               "queryRef": "Medidas.Margem Líquida (Trimestral)",
-              "nativeQueryRef": "Margem Líquida (Trimestral)"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Medidas"
-                    }
-                  },
-                  "Property": "EBITDA"
-                }
-              },
-              "queryRef": "Medidas.EBITDA",
-              "nativeQueryRef": "EBITDA"
+              "nativeQueryRef": "Margem Líquida",
+              "displayName": "Margem Líquida"
             },
             {
               "field": {
@@ -112,6 +85,20 @@
               },
               "queryRef": "Medidas.ROE",
               "nativeQueryRef": "ROE"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "EBITDA"
+                }
+              },
+              "queryRef": "Medidas.EBITDA",
+              "nativeQueryRef": "EBITDA"
             },
             {
               "field": {
@@ -130,7 +117,8 @@
                 }
               },
               "queryRef": "Sum(f_contabilidade.Lucro_Liquido)",
-              "nativeQueryRef": "Soma de Lucro_Liquido"
+              "nativeQueryRef": "Lucro Liquido",
+              "displayName": "Lucro Liquido"
             },
             {
               "field": {
@@ -149,7 +137,8 @@
                 }
               },
               "queryRef": "Sum(f_contabilidade.Patrimonio_Liquido)",
-              "nativeQueryRef": "Soma de Patrimonio_Liquido"
+              "nativeQueryRef": "Patrimonio Liquido",
+              "displayName": "Patrimonio Liquido"
             },
             {
               "field": {
@@ -168,7 +157,22 @@
                 }
               },
               "queryRef": "Sum(f_contabilidade.Receita_Liquida)",
-              "nativeQueryRef": "Soma de Receita_Liquida"
+              "nativeQueryRef": "Receita Liquida",
+              "displayName": "Receita Liquida"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "P/L Atual"
+                }
+              },
+              "queryRef": "Medidas.P/L Atual",
+              "nativeQueryRef": "P/L Atual"
             }
           ]
         }
@@ -308,6 +312,40 @@
               "expr": {
                 "Literal": {
                   "Value": "'AlternatingRowsNew'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

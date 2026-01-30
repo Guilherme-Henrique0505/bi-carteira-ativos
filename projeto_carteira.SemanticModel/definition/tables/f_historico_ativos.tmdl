@@ -75,7 +75,7 @@ table f_historico_ativos
 		mode: import
 		source =
 				let
-				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)import os#(lf)#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)if os.path.exists(caminho_db):#(lf)    conn = sqlite3.connect(caminho_db)#(lf)    df = pd.read_sql_query(""SELECT * FROM historico_ativos"", conn)#(lf)    conn.close()#(lf)else:#(lf)    raise FileNotFoundError(f""Arquivo nao encontrado no caminho: {caminho_db}"")"),
+				    Fonte = Python.Execute("import sqlite3#(lf)import pandas as pd#(lf)import os#(lf)#(lf)caminho_db = r'C:\Users\gabmc\Downloads\projetos guilherme\bi-carteira-ativos\dados_investimentos.db'#(lf)#(lf)if os.path.exists(caminho_db):#(lf)    conn = sqlite3.connect(caminho_db)#(lf)    df = pd.read_sql_query(""SELECT * FROM f_historico_ativos"", conn)#(lf)    conn.close()#(lf)else:#(lf)    raise FileNotFoundError(f""Arquivo nao encontrado no caminho: {caminho_db}"")"),
 				    df1 = Fonte{[Name="df"]}[Value],
 				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(df1, {{"Open", type number}, {"Low", type number}, {"High", type number}, {"Close", type number}}, "en-US"),
 				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade",{{"Data", type datetime}, {"Volume", Int64.Type}})

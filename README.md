@@ -14,9 +14,11 @@ O objetivo desta ferramenta é fornecer suporte à decisão para investidores, p
 ---
 
 ## Estrutura do Projeto
-* `extrator.py`: Script principal que consome a API do Yahoo Finance para buscar cotações (`f_historico`) e indicadores (`f_contabilidade`).
-* `banco_dados.db`: Banco de dados SQLite onde os dados são persistidos de forma relacional.
-* `Dashboard_Financeiro.pbix`: Relatório final com análises de performance, volume e fundamentos econômicos.
+* `invest_extractor.py`: Script mestre que centraliza o pipeline de extração de metadados, contabilidade trimestral e histórico de preços.
+
+* `dados_investimentos.db`: Banco de dados SQLite.
+
+* `projeto_carteira.pbip`: Relatório final com análises de performance, volume e fundamentos econômicos.
 
 ---
 
@@ -40,3 +42,7 @@ O objetivo desta ferramenta é fornecer suporte à decisão para investidores, p
 1. Instale as dependências necessárias:
    ```bash
    pip install yfinance pandas
+
+2. Executar script de extração:  
+   ```bash
+   py invest_extractor.py
